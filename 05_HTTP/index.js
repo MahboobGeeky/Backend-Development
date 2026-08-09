@@ -20,7 +20,7 @@ const server = http.createServer(function(req, res) {
             res.writeHead(200)
             break;
         default:
-            res.writeHead(404);
+            res.writeHead(403);
             res.end(`you are lost`);
 
     }
