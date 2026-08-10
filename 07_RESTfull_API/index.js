@@ -3,7 +3,7 @@ const { error } = require("node:console");
 const app = express();
 const PORT = 8000;
 
-// // Creating Logs
+// Creating Logs
 const fs = require("fs");
 
 app.use((req, res, next) => {
