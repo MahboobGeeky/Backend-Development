@@ -4,6 +4,7 @@ const app = express();
 const PORT = 8000;
 
 // Creating Logs
+// log Middleware
 const fs = require("fs");
 
 app.use((req, res, next) => {
@@ -17,6 +18,11 @@ app.use((req, res, next) => {
 
   next();
 });
+
+function customMiddleware(req, res, next) {
+  console.log('I am custom middleware');
+  next();
+}
 
 // in memory database
 const books = [
