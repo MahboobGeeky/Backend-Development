@@ -1,3 +1,4 @@
+require('dotenv/config'); // connect .env file
 const express = require("express");
 const { error } = require("node:console");
 const {loggerMiddleware} = require('./middlewares/logger')
