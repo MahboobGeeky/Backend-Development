@@ -6,7 +6,7 @@ const app = express();
 const PORT = 8000;
 
 const bookRouter = require('./routes/book.routes');
-
+const authorRouter = require('./routes/author.routes');
 
 function customMiddleware(req, res, next) {
   console.log('I am custom middleware');
@@ -21,6 +21,8 @@ app.use(loggerMiddleware); // log Middleware
 
 // Router
 app.use('/books', bookRouter);
+app.use('/authors', authorRouter);
+
 
 app.listen(PORT, () => {
   console.log(`HTTP server is running on PORT ${PORT}`);
