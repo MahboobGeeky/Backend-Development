@@ -3,6 +3,8 @@ import express from 'express';
 const app = express()
 const PORT = 8000
 
+app.use(express.json());
+
 const DIARY = {};
 const EMAILS = new Set();
 
@@ -18,13 +20,14 @@ app.post('/signup', (req, res) => {
     // create a token for user
     const token = `${Date.now()}`;
 
-    // Do a entry in diary
+    // Do a entry in diary 
     DIARY[token] = {name, email, password};
     EMAILS.add(email);
 
     return res.json({status: 'success', token});
 });
 
+// take back your car
 app.post('/me', (req, res) => {
     const {token} = req.body;
     if(!token){
@@ -35,6 +38,29 @@ app.post('/me', (req, res) => {
         return res.status(404).json({ Error: `Invalid Token`});
     }
 
+    const entry = DIARY[token];
+
+    return res.json({data: entry});
+
 });
+
+// Private Data
+app.post('/private-data', (req, res) => {
+    const {token} = req.body;
+
+    if(!token){
+        return res.status(404).json({ Error: `Missing Token`});
+    }
+
+    if( !(token in DIARY) ) {
+        return res.status(404).json({ Error: `Invalid Token`});
+    }
+
+    const entry = DIARY[token];
+    return res.json({data: { privateData: 'Access granted'} });
+
+});
+
+
 
 app.listen(PORT, () => console.log(`Server is running on ${PORT}`));
