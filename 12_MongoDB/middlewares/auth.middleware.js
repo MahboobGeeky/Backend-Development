@@ -1,5 +1,14 @@
 import jwt from "jsonwebtoken";
-import { config } from "dotenv";
+
+
+// JSDoc comments
+/**
+ *
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @param {import("express").NextFunction} next
+ */
+
 import "dotenv/config";
 
 export const authMiddleware = async (req, res, next) => {
@@ -22,7 +31,7 @@ export const authMiddleware = async (req, res, next) => {
 
     req.user = decoded;
     return next();
-    
+
   } catch (error) {
     next();
   }
